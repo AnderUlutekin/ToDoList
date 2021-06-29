@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.example.todolist.data.Item" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:padding="4dp">
+
+        <CheckBox
+            android:id="@+id/cbStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:minWidth="0dp"
+            android:minHeight="0dp" />
+
+        <TextView
+            android:id="@+id/tvItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/cbStatus"
+            android:layout_alignBottom="@id/cbStatus"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/cbStatus"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            tools:text="Example Item"
+            android:text="@{item.message}"/>
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvItem"
+            android:layout_alignRight="@id/tvItem"
+            android:layout_alignParentBottom="true"
+            android:text="Example Date"
+            android:textSize="11sp"
+            app:setDate="@{item.date}"/>
+
+    </RelativeLayout>
+</layout>
