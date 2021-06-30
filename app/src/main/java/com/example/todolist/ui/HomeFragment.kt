@@ -3,8 +3,10 @@ package com.example.todolist.ui
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -37,8 +39,10 @@ class HomeFragment : Fragment() {
         binding.rvList.adapter = adapter
 
         binding.fabAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment2_to_addFragment2)
+            Navigation.findNavController(binding.root).navigate(R.id.action_homeFragment2_to_addFragment2)
         }
+
+        
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0,
         ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
@@ -56,7 +60,7 @@ class HomeFragment : Fragment() {
                 viewModel.delete(item)
 
                 Snackbar.make(binding.root, "Silindi!", Snackbar.LENGTH_LONG).apply {
-                    setAction("Geri") {
+                    setAction("Geri al") {
                         viewModel.insert(item)
                     }
                     show()
@@ -82,10 +86,11 @@ class HomeFragment : Fragment() {
 
     private fun deleteAllItem() {
         AlertDialog.Builder(requireContext())
-            .setTitle("Hepsini Sil")
-            .setMessage("Emin misiniz?")
+            .setTitle("Hepsini sil?")
+            .setMessage("Hepsini silmek istediğinize emin misiniz?")
             .setPositiveButton("Evet"){dialog, _ ->
                 viewModel.deleteAll()
+                Toast.makeText(requireContext(), "Başarıyla silindi!", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
             }.setNegativeButton("Hayı"){dialog, _ ->
                 dialog.dismiss()

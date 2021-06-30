@@ -1,5 +1,7 @@
 package com.example.todolist.ui
 
+import android.graphics.Paint
+import android.text.SpannableString
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -16,6 +18,19 @@ class ItemAdapter : ListAdapter<Item, ItemAdapter.ViewHolder>(ItemDiffCallback) 
     }
 
     class ViewHolder(val binding: SingleItemBinding) : RecyclerView.ViewHolder(binding.root) {
+
+        val checkBox = binding.cbStatus
+        var text = binding.tvItem
+        init {
+            checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    text.paintFlags = text.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                }
+                else {
+                    text.paintFlags = 0
+                }
+            }
+        }
 
         fun bind(item: Item) {
             binding.item = item

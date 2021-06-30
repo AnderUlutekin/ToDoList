@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.todolist.R
 import com.example.todolist.data.Item
@@ -49,7 +50,7 @@ class AddFragment : Fragment() {
 
             viewModel.insert(item)
             Toast.makeText(requireContext(), "Eklendi", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_addFragment2_to_homeFragment2)
+            Navigation.findNavController(binding.root).navigate(R.id.action_addFragment2_to_homeFragment2)
         }
 
         return binding.root
